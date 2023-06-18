@@ -501,7 +501,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Reagent</td>
+                <td>Odczynnik</td>
                 <td>
                   <select name="reagent">
                     {% for reagent in reagents %}
@@ -546,7 +546,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu, a następnie przeciągając kursorem po kalendarzu wybierz dogodny termin. Poniżej kalendarza wybierz odpowiednie odczynniki i dokonaj rezerwacji</p>
+          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu,
+            a następnie przeciągając kursorem po kalendarzu wybierz dogodny termin.
+            Wybierz odpowiednie odczynniki i dokonaj rezerwacji.
+            Po wykonaniu rezerwacji sprawdź czy została ona dodana do zakładki "Moje rezerwacje".
+            Jeśli nie, przy ponownym rezerwowaniu upewnij się, że wprowadzasz odpowiednią ilość odczynnika i
+            uzupełniasz wszystkie pola"
+          </p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
