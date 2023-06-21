@@ -16,6 +16,10 @@ urlpatterns = [
     path('get_availability/', views.get_availability, name='get_availability'),
     path('delete_reservation/<int:reservation_id>/', views.delete_reservation, name='delete_reservation'),
     path('get_reservations/', views.get_reservations, name='get_reservations'),
+    path('used_reagents/', views.used_reagents, name='used_reagents'),
+    path('lab_equipment/', views.lab_equipment, name='lab_equipment'),
+    path('get_lab_equipments/', views.get_lab_equipments, name='get_lab_equipments'),
+
 ]
 
 

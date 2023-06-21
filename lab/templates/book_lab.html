@@ -1,306 +1,4 @@
 
-
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>-->
-
-<!--<div id="calendar"></div>-->
-<!--<script>-->
-<!--  $(document).ready(function() {-->
-<!--    $('#calendar').fullCalendar({-->
-<!--      header: {-->
-<!--        left: 'prev,next today',-->
-<!--        center: 'title',-->
-<!--        right: 'month,agendaWeek,agendaDay'-->
-<!--      },-->
-<!--      defaultView: 'agendaWeek',-->
-<!--      minTime: '08:00:00',-->
-<!--      maxTime: '20:00:00',-->
-<!--      slotDuration: '00:30:00',-->
-<!--      selectable: true,-->
-<!--      events: [-->
-<!--        // Add the reserved time slots as events-->
-<!--        {% for reservation in reservations %}-->
-<!--          {-->
-<!--            title: 'Reserved',-->
-<!--            start: '{{ reservation.start_time|date:"Y-m-d H:i:s" }}',-->
-<!--            end: '{{ reservation.end_time|date:"Y-m-d H:i:s" }}',-->
-<!--            color: 'red'-->
-<!--          },-->
-<!--        {% endfor %}-->
-<!--      ],-->
-<!--      select: function(start, end) {-->
-<!--        // Update the input fields with selected start and end times-->
-<!--        $('input[name="start_time"]').val(start.format('YYYY-MM-DD HH:mm:ss'));-->
-<!--        $('input[name="end_time"]').val(end.format('YYYY-MM-DD HH:mm:ss'));-->
-<!--      }-->
-<!--    });-->
-<!--  });-->
-<!--</script>-->
-
-<!--<script>-->
-<!--  $(document).ready(function() {-->
-<!--    // Initialize the calendar with empty events-->
-<!--    $('#calendar').fullCalendar({-->
-<!--      // ...-->
-<!--      events: []-->
-<!--    });-->
-
-<!--    // Event listener for lab room selection-->
-<!--    $('select[name="lab_room"]').on('change', function() {-->
-<!--      var labRoomId = $(this).val();-->
-<!--      updateCalendar(labRoomId);-->
-<!--    });-->
-
-<!--    // Function to update the calendar with availability for the selected lab room-->
-<!--    function updateCalendar(labRoomId) {-->
-<!--      // Clear existing events-->
-<!--      $('#calendar').fullCalendar('removeEvents');-->
-
-<!--      // Fetch availability for the selected lab room using AJAX-->
-<!--      $.ajax({-->
-<!--        url: '/get_availability/',  // URL to fetch availability data-->
-<!--        method: 'GET',-->
-<!--        data: { lab_room_id: labRoomId },-->
-<!--        success: function(response) {-->
-<!--          // Parse the response to extract availability data-->
-<!--          var availability = JSON.parse(response);-->
-
-<!--          // Iterate over the availability and add events to the calendar-->
-<!--          for (var i = 0; i < availability.length; i++) {-->
-<!--            var event = {-->
-<!--              title: 'Available',-->
-<!--              start: availability[i].start_time,-->
-<!--              end: availability[i].end_time,-->
-<!--              color: 'green'-->
-<!--            };-->
-<!--            $('#calendar').fullCalendar('renderEvent', event);-->
-<!--          }-->
-<!--        },-->
-<!--        error: function(xhr, status, error) {-->
-<!--          // Handle error if necessary-->
-<!--        }-->
-<!--      });-->
-<!--    }-->
-<!--  });-->
-<!--</script>-->
-
-
-
-<!--<form method="POST" action="{% url 'add_reservation' %}">-->
-<!--  {% csrf_token %}-->
-
-<!--<table>-->
-<!--  <tbody>-->
-<!--    <tr>-->
-<!--      <td>Lab Room</td>-->
-<!--      <td>-->
-<!--        <select name="lab_room">-->
-<!--          {% for lab_room in lab_rooms %}-->
-<!--          <option value="{{ lab_room.id }}">{{ lab_room.room_number }}</option>-->
-<!--          {% endfor %}-->
-<!--        </select>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td>Reagent</td>-->
-<!--      <td>-->
-<!--        <select name="reagent">-->
-<!--          {% for reagent in reagents %}-->
-<!--          <option value="{{ reagent.id }}">{{ reagent.name }}</option>-->
-<!--          {% endfor %}-->
-<!--        </select>-->
-<!--      </td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td>Start Time</td>-->
-<!--      <td><input type="text" name="start_time" readonly></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td>End Time</td>-->
-<!--      <td><input type="text" name="end_time" readonly></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td>Quantity</td>-->
-<!--      <td><input type="text" name="quantity"></td>-->
-<!--    </tr>-->
-<!--    <tr>-->
-<!--      <td></td>-->
-<!--      <td><button type="submit">Book Lab</button></td>-->
-<!--    </tr>-->
-<!--  </tbody>-->
-<!--</table>-->
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>-->
-<!--  <script sr-->
-<!--c="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--  <div id="calendar"></div>-->
-<!--<div id="userModal" class="modal" tabindex="-1">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title">INSTRUKCJA REZERWACJI</h5>-->
-<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu, a nastęnie przeciągając-->
-<!--              kursorem po kalendarzu wybierz dogodny termin. Poniżej kalendarza wybierz odpowiednie odczynniki i dokonaj rezerwacji</p>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <script>-->
-<!--    $(document).ready(function() {-->
-<!--      // Show the user modal-->
-<!--      $('#userModal').modal('show');-->
-
-<!--      // Function to dismiss the user modal-->
-<!--      function dismissUserModal() {-->
-<!--        $('#userModal').modal('hide');-->
-<!--      }-->
-
-<!--      // Dismiss the user modal when the "OK" button is clicked-->
-<!--      $('#userModal').on('hidden.bs.modal', function () {-->
-<!--        dismissUserModal();-->
-<!--      });-->
-
-<!--      // Rest of your calendar code-->
-<!--      // ...-->
-<!--    });-->
-<!--  </script>-->
-<!--  <script>-->
-<!--    $(document).ready(function() {-->
-<!--      var events = [-->
-<!--        {% for reservation in reservations %}-->
-<!--          {-->
-<!--            title: 'Reserved',-->
-<!--            start: '{{ reservation.start_time|date:"Y-m-d H:i:s" }}',-->
-<!--            end: '{{ reservation.end_time|date:"Y-m-d H:i:s" }}',-->
-<!--            color: 'red'-->
-<!--          },-->
-<!--        {% endfor %}-->
-<!--      ];-->
-
-<!--      $('#calendar').fullCalendar({-->
-<!--        header: {-->
-<!--          left: 'prev,next today',-->
-<!--          center: 'title',-->
-<!--          right: 'month,agendaWeek,agendaDay'-->
-<!--        },-->
-<!--        defaultView: 'agendaWeek',-->
-<!--        minTime: '08:00:00',-->
-<!--        maxTime: '20:00:00',-->
-<!--        slotDuration: '00:30:00',-->
-<!--        selectable: true,-->
-<!--        events: events,-->
-<!--        select: function(start, end) {-->
-<!--          // Update the input fields with selected start and end times-->
-<!--          $('input[name="start_time"]').val(start.format('YYYY-MM-DD HH:mm:ss'));-->
-<!--          $('input[name="end_time"]').val(end.format('YYYY-MM-DD HH:mm:ss'));-->
-<!--        }-->
-<!--      });-->
-
-<!--      $('select[name="lab_room"]').on('change', function() {-->
-<!--        var labRoomId = $(this).val();-->
-<!--        updateCalendar(labRoomId);-->
-<!--      });-->
-
-<!--      function updateCalendar(labRoomId) {-->
-<!--        $.ajax({-->
-<!--          url: '/get_availability/',-->
-<!--          method: 'GET',-->
-<!--          data: { lab_room_id: labRoomId },-->
-<!--          success: function(response) {-->
-<!--            var availability = JSON.parse(response);-->
-<!--            var events = [];-->
-
-<!--            for (var i = 0; i < availability.length; i++) {-->
-<!--              var event = {-->
-<!--                title: 'Available',-->
-<!--                start: availability[i].start_time,-->
-<!--                end: availability[i].end_time,-->
-<!--                color: 'green'-->
-<!--              };-->
-<!--              events.push(event);-->
-<!--            }-->
-
-<!--            $('#calendar').fullCalendar('removeEvents');-->
-<!--            $('#calendar').fullCalendar('addEventSource', events);-->
-<!--            $('#calendar').fullCalendar('rerenderEvents');-->
-<!--          },-->
-<!--          error: function(xhr, status, error) {-->
-<!--            console.log(error);-->
-<!--          }-->
-<!--        });-->
-<!--      }-->
-<!--    });-->
-<!--  </script>-->
-
-
-<!--  <form method="POST" action="{% url 'add_reservation' %}">-->
-<!--    {% csrf_token %}-->
-
-<!--    <table>-->
-<!--      <tbody>-->
-<!--        <tr>-->
-<!--          <td>Pokój laboratoryjny</td>-->
-<!--          <td>-->
-<!--            <select name="lab_room">-->
-<!--              {% for lab_room in lab_rooms %}-->
-<!--                <option value="{{ lab_room.id }}">{{ lab_room.room_number }}</option>-->
-<!--              {% endfor %}-->
-<!--            </select>-->
-<!--          </td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td>Reagent</td>-->
-<!--          <td>-->
-<!--            <select name="reagent">-->
-<!--              {% for reagent in reagents %}-->
-<!--                <option value="{{ reagent.id }}">{{ reagent.name }}</option>-->
-<!--              {% endfor %}-->
-<!--            </select>-->
-<!--            <tr>-->
-
-
-
-<!--          </td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td>Czas początkowy</td>-->
-<!--          <td><input type="text" name="start_time" readonly></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td>Czas końcowy</td>-->
-<!--          <td><input type="text" name="end_time" readonly></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td>Ilość</td>-->
-<!--          <td><input type="text" name="quantity"></td>-->
-<!--        </tr>-->
-<!--        <tr>-->
-<!--          <td></td>-->
-<!--          <td><button type="submit">Zarezerwuj</button></td>-->
-<!--        </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
-<!--  </form>-->
-<!--</body>-->
-<!--</html>-->
-<!--  <script>-->
 <!--<!DOCTYPE html>-->
 <!--<html>-->
 <!--<head>-->
@@ -323,6 +21,7 @@
 <!--                <td>Pokój laboratoryjny</td>-->
 <!--                <td>-->
 <!--                  <select name="lab_room">-->
+<!--                    <option value="" selected>Wybierz pokój laboratoryjny</option>-->
 <!--                    {% for lab_room in lab_rooms %}-->
 <!--                      <option value="{{ lab_room.id }}">{{ lab_room.room_number }}</option>-->
 <!--                    {% endfor %}-->
@@ -330,14 +29,7 @@
 <!--                </td>-->
 <!--              </tr>-->
 <!--              <tr>-->
-<!--                <td>Reagent</td>-->
-<!--                <td>-->
-<!--                  <select name="reagent">-->
-<!--                    {% for reagent in reagents %}-->
-<!--                      <option value="{{ reagent.id }}">{{ reagent.name }}</option>-->
-<!--                    {% endfor %}-->
-<!--                  </select>-->
-<!--                </td>-->
+
 <!--              </tr>-->
 <!--              <tr>-->
 <!--                <td>Czas początkowy</td>-->
@@ -347,10 +39,7 @@
 <!--                <td>Czas końcowy</td>-->
 <!--                <td><input type="text" name="end_time" readonly></td>-->
 <!--              </tr>-->
-<!--              <tr>-->
-<!--                <td>Ilość</td>-->
-<!--                <td><input type="text" name="quantity"></td>-->
-<!--              </tr>-->
+
 <!--              <tr>-->
 <!--                <td></td>-->
 <!--                <td><button type="submit">Zarezerwuj</button></td>-->
@@ -361,11 +50,12 @@
 <!--      </div>-->
 <!--      <div class="col-md-6">-->
 <!--        <div id="calendar"></div>-->
+<!--        <a href="{% url 'home' %}" class="btn btn-primary">Powrót do strony głównej</a>-->
 <!--      </div>-->
 <!--    </div>-->
 <!--  </div>-->
 
-<!--  &lt;!&ndash; User modal code goes here &ndash;&gt;-->
+
 <!--  <div id="userModal" class="modal" tabindex="-1">-->
 <!--    <div class="modal-dialog">-->
 <!--      <div class="modal-content">-->
@@ -374,7 +64,29 @@
 <!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
 <!--        </div>-->
 <!--        <div class="modal-body">-->
-<!--          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu, a następnie przeciągając kursorem po kalendarzu wybierz dogodny termin. Poniżej kalendarza wybierz odpowiednie odczynniki i dokonaj rezerwacji</p>-->
+<!--          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu,-->
+<!--            a następnie przeciągając kursorem po kalendarzu wybierz dogodny termin.-->
+<!--            Wybierz odpowiednie odczynniki i dokonaj rezerwacji.-->
+<!--            Po wykonaniu rezerwacji sprawdź czy została ona dodana do zakładki "Moje rezerwacje".-->
+<!--            Jeśli nie, przy ponownym rezerwowaniu upewnij się, że wprowadzasz odpowiednią ilość odczynnika i-->
+<!--            uzupełniasz wszystkie pola"-->
+<!--          </p>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div id="reservationModal" class="modal" tabindex="-1">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title">Reservation Confirmation</h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <p>Your reservation was done correctly!</p>-->
 <!--        </div>-->
 <!--        <div class="modal-footer">-->
 <!--          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>-->
@@ -398,22 +110,8 @@
 <!--        dismissUserModal();-->
 <!--      });-->
 
-<!--      // Rest of your calendar code-->
-<!--      // ...-->
-<!--    });-->
-<!--  </script>-->
-<!--  <script>-->
-<!--    $(document).ready(function() {-->
-<!--      var events = [-->
-<!--        {% for reservation in reservations %}-->
-<!--          {-->
-<!--            title: 'Reserved',-->
-<!--            start: '{{ reservation.start_time|date:"Y-m-d H:i:s" }}',-->
-<!--            end: '{{ reservation.end_time|date:"Y-m-d H:i:s" }}',-->
-<!--            color: 'red'-->
-<!--          },-->
-<!--        {% endfor %}-->
-<!--      ];-->
+
+<!--      var getReservationsURL = '{% url 'get_reservations' %}';-->
 
 <!--      $('#calendar').fullCalendar({-->
 <!--        header: {-->
@@ -426,7 +124,7 @@
 <!--        maxTime: '20:00:00',-->
 <!--        slotDuration: '00:30:00',-->
 <!--        selectable: true,-->
-<!--        events: events,-->
+<!--        events: getReservationsURL,-->
 <!--        select: function(start, end) {-->
 <!--          // Update the input fields with selected start and end times-->
 <!--          $('input[name="start_time"]').val(start.format('YYYY-MM-DD HH:mm:ss'));-->
@@ -441,19 +139,20 @@
 
 <!--      function updateCalendar(labRoomId) {-->
 <!--        $.ajax({-->
-<!--          url: '/get_availability/',-->
+<!--          url: getReservationsURL,-->
 <!--          method: 'GET',-->
 <!--          data: { lab_room_id: labRoomId },-->
 <!--          success: function(response) {-->
-<!--            var availability = JSON.parse(response);-->
+<!--            var reservations = response;-->
 <!--            var events = [];-->
 
-<!--            for (var i = 0; i < availability.length; i++) {-->
+<!--            for (var i = 0; i < reservations.length; i++) {-->
+<!--              var reservation = reservations[i];-->
 <!--              var event = {-->
-<!--                title: 'Available',-->
-<!--                start: availability[i].start_time,-->
-<!--                end: availability[i].end_time,-->
-<!--                color: 'green'-->
+<!--                title: 'Reserved',-->
+<!--                start: reservation.start,-->
+<!--                end: reservation.end,-->
+<!--                color: 'red'-->
 <!--              };-->
 <!--              events.push(event);-->
 <!--            }-->
@@ -466,11 +165,14 @@
 <!--            console.log(error);-->
 <!--          }-->
 <!--        });-->
+
 <!--      }-->
 <!--    });-->
 <!--  </script>-->
 <!--</body>-->
 <!--</html>-->
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -501,11 +203,12 @@
                 </td>
               </tr>
               <tr>
-                <td>Odczynnik</td>
+                <td>Sprzęt laboratoryjny</td>
                 <td>
-                  <select name="reagent">
-                    {% for reagent in reagents %}
-                      <option value="{{ reagent.id }}">{{ reagent.name }}</option>
+                  <select name="lab_equipment">
+                    <option value="" selected>Wybierz sprzęt laboratoryjny</option>
+                    {% for lab_equipment in lab_equipments %}
+                      <option value="{{ lab_equipment.id }}">{{ lab_equipment.name }}</option>
                     {% endfor %}
                   </select>
                 </td>
@@ -517,10 +220,6 @@
               <tr>
                 <td>Czas końcowy</td>
                 <td><input type="text" name="end_time" readonly></td>
-              </tr>
-              <tr>
-                <td>Ilość</td>
-                <td><input type="text" name="quantity"></td>
               </tr>
               <tr>
                 <td></td>
@@ -537,7 +236,6 @@
     </div>
   </div>
 
-  <!-- User modal code goes here -->
   <div id="userModal" class="modal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -546,12 +244,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu,
-            a następnie przeciągając kursorem po kalendarzu wybierz dogodny termin.
-            Wybierz odpowiednie odczynniki i dokonaj rezerwacji.
-            Po wykonaniu rezerwacji sprawdź czy została ona dodana do zakładki "Moje rezerwacje".
-            Jeśli nie, przy ponownym rezerwowaniu upewnij się, że wprowadzasz odpowiednią ilość odczynnika i
-            uzupełniasz wszystkie pola"
+          <p>Wybierz przedział tygodniowy w kalendarzu, następnie pokój i sprzęt laboratoryjny.
+            Sprawdź dostępność. Wybierz dzień i godzinę klikając i przeciągając kursorem po kalendarzu.
+            Zatwierdź rezerwację.
           </p>
         </div>
         <div class="modal-footer">
@@ -568,7 +263,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Your reservation was done correctly!</p>
+          <p>Rezerwacja dodana poprawnie!</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -592,7 +287,6 @@
         dismissUserModal();
       });
 
-
       var getReservationsURL = '{% url 'get_reservations' %}';
 
       $('#calendar').fullCalendar({
@@ -606,7 +300,18 @@
         maxTime: '20:00:00',
         slotDuration: '00:30:00',
         selectable: true,
-        events: getReservationsURL,
+        eventSources: [
+          {
+            url: getReservationsURL,
+            color: 'red',
+            textColor: 'white',
+            eventDataTransform: function(eventData) {
+              eventData.color = 'red';
+              eventData.textColor = 'white';
+              return eventData;
+            }
+          }
+        ],
         select: function(start, end) {
           // Update the input fields with selected start and end times
           $('input[name="start_time"]').val(start.format('YYYY-MM-DD HH:mm:ss'));
@@ -614,275 +319,86 @@
         }
       });
 
-      $('select[name="lab_room"]').on('change', function() {
-        var labRoomId = $(this).val();
-        updateCalendar(labRoomId);
-      });
+        $('select[name="lab_room"]').on('change', function() {
+    var labRoomId = $(this).val();
+    updateLabEquipments(labRoomId);
+  });
 
-      function updateCalendar(labRoomId) {
+  $('select[name="lab_equipment"]').on('change', function() {
+    var labRoomId = $('select[name="lab_room"]').val();
+    var labEquipmentId = $(this).val();
+    updateCalendar(labRoomId, labEquipmentId);
+  });
+
+
+
+      function updateLabEquipments(labRoomId) {
+  $.ajax({
+    url: '{% url 'get_lab_equipments' %}',
+    method: 'GET',
+    data: { lab_room_id: labRoomId },
+    success: function(response) {
+      var labEquipments = response;
+      var labEquipmentDropdown = $('select[name="lab_equipment"]');
+
+      labEquipmentDropdown.empty();
+      labEquipmentDropdown.append('<option value="" selected>Wybierz sprzęt laboratoryjny</option>');
+
+      for (var i = 0; i < labEquipments.length; i++) {
+        labEquipmentDropdown.append('<option value="' + labEquipments[i].id + '">' + labEquipments[i].name + '</option>');
+      }
+
+      // Retrieve selected lab equipment ID
+      var labEquipmentId = labEquipmentDropdown.val();
+
+      // Update the calendar with lab room and lab equipment ID
+      updateCalendar(labRoomId, labEquipmentId);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      console.log(thrownError);
+    }
+  });
+}
+
+ function updateCalendar(labRoomId, labEquipmentId) {
+    var getReservationsURL = '{% url 'get_reservations' %}?';
+
+    if (labRoomId) {
+      getReservationsURL += 'lab_room_id=' + labRoomId;
+    }
+    if (labEquipmentId) {
+      getReservationsURL += '&lab_equipment_id=' + labEquipmentId;
+    }
+
+    $('#calendar').fullCalendar('removeEvents');
+    $('#calendar').fullCalendar('addEventSource', getReservationsURL);
+  }
+
+      $('form').on('submit', function(event) {
+        event.preventDefault();
+
+        var form = $(this);
+        var url = form.attr('action');
+        var formData = form.serialize();
+
         $.ajax({
-          url: getReservationsURL,
-          method: 'GET',
-          data: { lab_room_id: labRoomId },
+          url: url,
+          method: 'POST',
+          data: formData,
           success: function(response) {
-            var reservations = response;
-            var events = [];
-
-            for (var i = 0; i < reservations.length; i++) {
-              var reservation = reservations[i];
-              var event = {
-                title: 'Reserved',
-                start: reservation.start,
-                end: reservation.end,
-                color: 'red'
-              };
-              events.push(event);
-            }
-
-            $('#calendar').fullCalendar('removeEvents');
-            $('#calendar').fullCalendar('addEventSource', events);
-            $('#calendar').fullCalendar('rerenderEvents');
+            $('#reservationModal').modal('show');
+            form.trigger('reset');
           },
-          error: function(xhr, status, error) {
-            console.log(error);
+          error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError);
           }
         });
+      });
 
-      }
+      $('#reservationModal').on('hidden.bs.modal', function () {
+        location.reload();
+      });
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>-->
-<!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css">-->
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>-->
-<!--</head>-->
-<!--<body>-->
-<!--  <div class="container">-->
-<!--    <div class="row">-->
-<!--      <div class="col-md-6">-->
-<!--        <form method="POST" action="{% url 'add_reservation' %}">-->
-<!--          {% csrf_token %}-->
-<!--          <table class="table">-->
-<!--            <tbody>-->
-<!--              <tr>-->
-<!--                <td>Pokój laboratoryjny</td>-->
-<!--                <td>-->
-<!--                  <select id="labRoomSelect" name="lab_room">-->
-<!--                    {% for lab_room in lab_rooms %}-->
-<!--                      <option value="{{ lab_room.id }}">{{ lab_room.room_number }}</option>-->
-<!--                    {% endfor %}-->
-<!--                  </select>-->
-<!--                </td>-->
-<!--              </tr>-->
-<!--              <tr>-->
-<!--                <td>Reagent</td>-->
-<!--                <td>-->
-<!--                  <select name="reagent">-->
-<!--                    {% for reagent in reagents %}-->
-<!--                      <option value="{{ reagent.id }}">{{ reagent.name }}</option>-->
-<!--                    {% endfor %}-->
-<!--                  </select>-->
-<!--                </td>-->
-<!--              </tr>-->
-<!--              <tr>-->
-<!--                <td>Czas początkowy</td>-->
-<!--                <td><input type="text" name="start_time" readonly></td>-->
-<!--              </tr>-->
-<!--              <tr>-->
-<!--                <td>Czas końcowy</td>-->
-<!--                <td><input type="text" name="end_time" readonly></td>-->
-<!--              </tr>-->
-<!--              <tr>-->
-<!--                <td>Ilość</td>-->
-<!--                <td><input type="text" name="quantity"></td>-->
-<!--              </tr>-->
-<!--              <tr>-->
-<!--                <td></td>-->
-<!--                <td><button type="submit">Zarezerwuj</button></td>-->
-<!--              </tr>-->
-<!--            </tbody>-->
-<!--          </table>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--      <div class="col-md-6">-->
-<!--        <div id="calendar"></div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; User modal code goes here &ndash;&gt;-->
-<!--  <div id="userModal" class="modal" tabindex="-1">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title">INSTRUKCJA REZERWACJI</h5>-->
-<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          <p>Wybierz pokój laboratoryjny w lewym górnym rogu, sprawdź jego dostępność w kalendarzu, a następnie przeciągając kursorem po kalendarzu wybierz dogodny termin. Poniżej kalendarza wybierz odpowiednie odczynniki i dokonaj rezerwacji</p>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <script>-->
-<!--    $(document).ready(function() {-->
-<!--      // Show the user modal-->
-<!--      $('#userModal').modal('show');-->
-
-<!--      // Function to dismiss the user modal-->
-<!--      function dismissUserModal() {-->
-<!--        $('#userModal').modal('hide');-->
-<!--      }-->
-
-<!--      // Dismiss the user modal when the "OK" button is clicked-->
-<!--      $('#userModal').on('hidden.bs.modal', function () {-->
-<!--        dismissUserModal();-->
-<!--      });-->
-
-<!--      var calendar = $('#calendar').fullCalendar({-->
-<!--        header: {-->
-<!--          left: 'prev,next today',-->
-<!--          center: 'title',-->
-<!--          right: 'month,agendaWeek,agendaDay'-->
-<!--        },-->
-<!--        defaultView: 'agendaWeek',-->
-<!--        minTime: '08:00:00',-->
-<!--        maxTime: '20:00:00',-->
-<!--        slotDuration: '00:30:00',-->
-<!--        selectable: true,-->
-<!--        events: '/get_availability/?lab_room_id={lab_room_id}', // Corrected link with parameter-->
-<!--        select: function(start, end) {-->
-<!--          // Update the input fields with selected start and end times-->
-<!--          $('input[name="start_time"]').val(start.format('YYYY-MM-DD HH:mm:ss'));-->
-<!--          $('input[name="end_time"]').val(end.format('YYYY-MM-DD HH:mm:ss'));-->
-<!--        }-->
-<!--      });-->
-
-<!--      $('#labRoomSelect').on('change', function() {-->
-<!--        var labRoomId = $(this).val();-->
-<!--        calendar.fullCalendar('removeEvents');-->
-<!--        calendar.fullCalendar('addEventSource', '/get_availability/?lab_room_id=' + labRoomId);-->
-<!--        calendar.fullCalendar('refetchEvents');-->
-<!--      });-->
-<!--    });-->
-<!--  </script>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-
-
-
-
-
-<!--  $(document).ready(function() {-->
-<!--    var reagentCount = 1;-->
-
-<!--    // Add reagent row-->
-<!--    function addReagentRow() {-->
-<!--      var reagentRow = $('<tr>').attr('id', 'reagent-row-' + reagentCount);-->
-<!--      var reagentSelect = $('<select>').attr('name', 'reagents-' + reagentCount);-->
-<!--      var quantityInput = $('<input>').attr('type', 'text').attr('name', 'quantity-' + reagentCount);-->
-<!--      var removeButton = $('<button>').attr('type', 'button').text('Usuń').on('click', function() {-->
-<!--        removeReagentRow(reagentCount);-->
-<!--      });-->
-
-<!--      // Populate reagent select options-->
-<!--      {% for reagent in reagents %}-->
-<!--        var reagentOption = $('<option>').attr('value', '{{ reagent.id }}').text('{{ reagent.name }}');-->
-<!--        reagentSelect.append(reagentOption);-->
-<!--      {% endfor %}-->
-
-<!--      reagentRow.append($('<td>').append(reagentSelect));-->
-<!--      reagentRow.append($('<td>').append(quantityInput));-->
-<!--      reagentRow.append($('<td>').append(removeButton));-->
-
-<!--      $('#reagent-table tbody').append(reagentRow);-->
-<!--      reagentCount++;-->
-<!--    }-->
-
-<!--    // Remove reagent row-->
-<!--    function removeReagentRow(rowId) {-->
-<!--      $('#reagent-row-' + rowId).remove();-->
-<!--    }-->
-
-<!--    // Add reagent button click event-->
-<!--    $('#add-reagent').on('click', function() {-->
-<!--      addReagentRow();-->
-<!--    });-->
-
-<!--    // Initial reagent row-->
-<!--    addReagentRow();-->
-<!--  });-->
-<!--</script>-->
-
-
-<!--<form method="POST" action="{% url 'add_reservation' %}">-->
-<!--  {% csrf_token %}-->
-
-<!--  <table>-->
-<!--    <tbody>-->
-<!--      <tr>-->
-<!--        <td>Pokój laboratoryjny</td>-->
-<!--        <td>-->
-<!--          <select name="lab_room">-->
-<!--            {% for lab_room in lab_rooms %}-->
-<!--              <option value="{{ lab_room.id }}">{{ lab_room.room_number }}</option>-->
-<!--            {% endfor %}-->
-<!--          </select>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>Reagent</td>-->
-<!--        <td>-->
-<!--          <select name="reagents" multiple>-->
-<!--            {% for reagent in reagents %}-->
-<!--              <option value="{{ reagent.id }}">{{ reagent.name }}</option>-->
-<!--            {% endfor %}-->
-<!--          </select>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>Czas początkowy</td>-->
-<!--        <td><input type="text" name="start_time" readonly></td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>Czas końcowy</td>-->
-<!--        <td><input type="text" name="end_time" readonly></td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td>Reagenty</td>-->
-<!--        <td>-->
-<!--          <table id="reagent-table">-->
-<!--            <tbody>-->
-<!--              &lt;!&ndash; Reagent rows will be dynamically added here &ndash;&gt;-->
-<!--            </tbody>-->
-<!--          </table>-->
-<!--          <button type="button" id="add-reagent">Dodaj reagent</button>-->
-<!--        </td>-->
-<!--      </tr>-->
-<!--      <tr>-->
-<!--        <td></td>-->
-<!--        <td><button type="submit">Zarezerwuj</button></td>-->
-<!--      </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--</form>-->
